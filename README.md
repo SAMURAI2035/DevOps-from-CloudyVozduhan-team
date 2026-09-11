@@ -1,2 +1,2 @@
-# DevOps-from-CloudVozduhan-team
+# DevOps-from-CloudyVozduhan-team
 лабораторные по облачным технологиям 
