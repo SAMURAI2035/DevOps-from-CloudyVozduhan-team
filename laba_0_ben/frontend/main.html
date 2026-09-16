@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="autor" content="yukagaro">
+        <meta name="copyright" content="yukagaro prod">
+        <link rel="stylesheet" href="css/style.min.css?_v=20260425204939">
+        <title>Мошенники</title>
+    </head>
+</head>
+<body>
+<header class="header">
+    <div class="_container header__container">
+        <div class="header__left">
+            <!-- Окно поиска мошенников -->
+            <div class="header__search">
+                <input type="text" placeholder="Найти" class="search-input">
+                <img src="img/loupe-icon.svg" alt="" class="search-icon">
+            </div>
+            <!-- Меню навигации по сводке, операциям и связям -->
+            <nav class="header__nav">
+                <button class="nav-btn active" data-tab="summary">Сводка</button>
+                <button class="nav-btn" data-tab="operations">Операции</button>
+               <!--  <button class="nav-btn" data-tab="connections">Связи</button> -->
+            </nav>
+        </div>
+        <!-- Профиль пользователя -->
+        <div class="header__profile profile" id="profileBtn">
+            <div class="profile__info">
+                <p class="profile__name">Лайт Ягами</p>
+                <p class="profile__id">ID: 504965</p>
+            </div>
+
+            <!-- Попап-меню при нажатии на профиль -->
+            <div class="profile__menu profile-menu">
+                <ul class="profile-menu__list">
+                    <li class="profile-menu__item">
+                        <a href="#" class="profile-menu__link">
+                            <img src="img/edit.svg" alt=""> Изменить пароль
+                        </a>
+                    </li>
+                    <li class="profile-menu__item">
+                        <a href="#" class="profile-menu__link">
+                            <img src="img/chain.svg" alt=""> Привязать телеграм
+                        </a>
+                    </li>
+                    <li class="profile-menu__item">
+                        <a href="#" class="profile-menu__link _exit">
+                            <img src="img/exit.svg" alt=""> Выйти из аккаунта
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<main class="main">
+    <div class="_container main__container">
+        <!-- Блок мошенников -->
+        <aside class="suspects">
+            <div class="suspects__list" id="suspectsList">
+            </div>
+        </aside>
+        <!-- Слайдер со сводкой, операциями и связями -->
+        <section class="content">
+            <div class="content__viewport">
+                <div class="content__slider" id="contentSlider">
+                    <div class="content__slide" id="tab-summary"></div>
+                    <div class="content__slide" id="tab-operations"></div>
+                    <div class="content__slide" id="tab-connections"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="autor" content="yukagaro">
+        <meta name="copyright" content="yukagaro prod">
+        <link rel="stylesheet" href="css/style.min.css?_v=20260425204939">
+        <title>Авторизация</title>
+    </head>
+</head>
+<body>
+<main class="login">
+    <div class="_container">
+        <!-- Форма входа на сайт -->
+        <form class="login__form" action="#" method="post">
+            <h1 class="login__title">Вход в аккаунт</h1>
+            <div class="login__group">
+                <input type="text" name="username" placeholder="Логин" required>
+                <div class="login__password">
+                    <input type="password" name="password" id="passwordInput" placeholder="Пароль" required>
+                    <button type="button" id="togglePassword" class="login__toggle">
+                        <img src="img/eye-open.svg" id="eyeIcon" alt="Показать пароль">
+                    </button>
+                </div>
+                <button class="login__submit" type="submit">
+                    <p class="login__paragraph">Войти</p>
+                    <img src="img/stroke_dark.svg" alt="">
+                </button>
+                <span id="passwordError" class="login__error-message">Неверный логин или пароль</span>
+            </div>
+        </form>
+    </div>
+</main>
+<script src="js/app.js"></script>
+</body>
+</html>
