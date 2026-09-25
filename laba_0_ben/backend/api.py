@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="BEN API", version="1.3.0")
 security = HTTPBearer()
-PORT = sys.argv[1] if len(sys.argv) > 1 else os.getenv("PORT", "5000")
+PORT = os.getenv("PORT") or (sys.argv[2] if len(sys.argv) > 2 else "5000")
 
 app.add_middleware(
     CORSMiddleware,
