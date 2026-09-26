@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
 
-echo "[1/8] Проверка HTTP -> HTTPS редиректа (app.local):"
+echo "[1/9] curl -I http://… → редирект 301 на https:"
 curl -s -I http://app.local | grep -E "HTTP/|Location"
 echo ""
 
-echo "[2/8] Проверка работы HTTPS (app.local):"
+echo "[2/9] Проверка работы HTTPS (app.local):"
 curl -s -k -I https://app.local | grep "HTTP/"
 echo ""
 
-echo "[3/8] Проверка авторизации /admin (без логина / с логином):"
-echo -n "Без пароля (ожидается 401 Unauthored): "
+echo "[3/9] Проверка авторизации /admin (без логина / с логином):"
+echo -n "curl на /admin без пароля → 401: "
 curl -s -k -o /dev/null -w "%{http_code}\n" https://app.local/admin/
 echo -n "С паролем (ожидается 200 OK): "
-curl -s -k -u admin:secret https://app.local/admin/
+curl -s -k -u admin:secret "%{http_code}\n" https://app.local/admin/
 echo ""
 
-echo "[4/8] Проверка Alias (/docs/):"
+echo "[4/9] Проверка Alias (/docs/):"
 curl -s -k https://app.local/docs/
 echo ""
 
-echo "[5/8] Проверка балансировки бэкенда (/api/health) — 4 запроса:"
+echo "[5/9] Несколько запросов на /api → видно чередование двух инстансов:"
 for i in {1..4}; do
     echo -n "Запрос $i: "
     curl -s -k https://app.local/api/health
@@ -27,18 +27,19 @@ for i in {1..4}; do
 done
 echo ""
 
-echo "[6/8] Проверка второго виртуального хоста (second.local):"
+echo "[6/9] Проверка второго виртуального хоста (second.local):"
 curl -s http://second.local
 echo ""
 
-echo "[7/8] Проверка лимита запросов (limit_req на /api/):"
-echo "Делаем частые запросы для получения 429:"
-for i in {1..5}; do
+echo "[7/9] Флуд запросами → упираемся в 429:"
+for i in {1..10}; do
     curl -s -k -o /dev/null -w "%{http_code} " https://app.local/api/health
 done
 echo ""
-echo ""
 
-echo "[8/8] Проверка кастомной 404 страницы:"
+echo "[8/9] Запрос несуществующей страницы → ваша 404:"
 curl -s -k https://app.local/non-existent-page
 echo ""
+
+echo "[9/9] Запрос с неизвестным/чужим Host → не отдаёт соседний хост:"
+curl -s -k -o /dev/null -w "HTTP Code: %{http_code}\n" -H "Host: unknown.local" https://app.local
