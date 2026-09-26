@@ -1,0 +1,5 @@
+# Секреты и сертификаты
+certs/
+*.key
+*.crt
+.htpasswd

@@ -27,6 +27,7 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="BEN API", version="1.3.0")
 security = HTTPBearer()
+PORT = os.getenv("PORT") or (sys.argv[2] if len(sys.argv) > 2 else "5000")
 
 app.add_middleware(
     CORSMiddleware,
@@ -95,7 +96,7 @@ def read_complaints_safe() -> pd.DataFrame:
 @app.get("/api/health")
 def health() -> Dict[str, str]:
     """Проверка живости сервиса — пригодится для Лабы 1 (балансировка) и Лабы 2 (HEALTHCHECK)."""
-    return {"status": "ok"}
+    return {"status": "ok", "instance": f"backend-{PORT}"}
 
 
 @app.post("/login")
