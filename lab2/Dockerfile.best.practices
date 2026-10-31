@@ -1,0 +1,22 @@
+FROM python:3.11-slim AS builder
+WORKDIR /build
+COPY requirements.txt .
+RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
+
+FROM python:3.11-slim
+RUN useradd --create-home --shell /bin/bash ben
+COPY --from=builder /install /usr/local
+
+USER ben
+WORKDIR /home/ben/app
+COPY --chown=ben:ben backend ./backend
+COPY --chown=ben:ben scripts ./scripts
+RUN chmod +x scripts/entrypoint.sh
+ENV PYTHONUNBUFFERED=1
+EXPOSE 8000
+
+HEALTHCHECK --interval=15s --timeout=5s --start-period=20s --retries=5 \
+  CMD python -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/api/health').status==200 else 1)"
+
+
+ENTRYPOINT ["./scripts/entrypoint.sh"]
