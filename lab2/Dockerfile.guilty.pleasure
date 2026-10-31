@@ -1,0 +1,6 @@
+FROM python:3.11
+WORKDIR /app
+COPY . .
+RUN pip install -r requirements.txt
+ENV DATABASE_URL=postgresql://ben:ben@db:5432/ben_db
+CMD ["python", "-m", "uvicorn", "backend.api:app", "--host", "0.0.0.0", "--port", "8000"]
